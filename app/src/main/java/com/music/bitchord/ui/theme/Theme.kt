@@ -1,49 +1,102 @@
 package com.music.bitchord.ui.theme
 
 import android.app.Activity
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
 import com.music.bitchord.R
 
 // Apple Music's signature red. No longer the primary accent, but kept for the
 // spots (Replay's rank badge) that want that specific red regardless of theme.
 val AccentRed = Color(0xFFFA2D48)
 
+/* ------------------------------------------------------------------
+ * COLOR — Expressive palette: Grape (primary) · Lime (secondary) · Bubblegum (tertiary)
+ * ------------------------------------------------------------------ */
 private val DarkColors = darkColorScheme(
-    primary = Color.White,
-    onPrimary = Color.Black,
-    background = Color.Black,
-    onBackground = Color.White,
-    surface = Color(0xFF0D0D0F),
-    onSurface = Color.White,
-    surfaceVariant = Color(0xFF1C1C1E),
-    onSurfaceVariant = Color(0xFF8E8E93),
-    outline = Color(0xFF2C2C2E),
+    primary = Color(0xFFC9B6FF),
+    onPrimary = Color(0xFF2E0F6B),
+    primaryContainer = Color(0xFF4A2C8A),
+    onPrimaryContainer = Color(0xFFE9DDFF),
+    secondary = Color(0xFFC6F26B),
+    onSecondary = Color(0xFF223600),
+    secondaryContainer = Color(0xFF334F00),
+    onSecondaryContainer = Color(0xFFDDFF9A),
+    tertiary = Color(0xFFFFADD1),
+    onTertiary = Color(0xFF5B1138),
+    tertiaryContainer = Color(0xFF7A2A50),
+    onTertiaryContainer = Color(0xFFFFD9E6),
+    background = Color(0xFF0F0C14),
+    onBackground = Color(0xFFE8E0EE),
+    surface = Color(0xFF14111A),
+    onSurface = Color(0xFFE8E0EE),
+    surfaceVariant = Color(0xFF2B2733),
+    onSurfaceVariant = Color(0xFFCBC4D0),
+    outline = Color(0xFF948F99),
+    outlineVariant = Color(0xFF49454F),
+    surfaceContainerLowest = Color(0xFF0B0910),
+    surfaceContainerLow = Color(0xFF1C1823),
+    surfaceContainer = Color(0xFF211D28),
+    surfaceContainerHigh = Color(0xFF2B2733),
+    surfaceContainerHighest = Color(0xFF36323E),
 )
 
 private val LightColors = lightColorScheme(
-    primary = Color.Black,
+    primary = Color(0xFF6B3FE0),
     onPrimary = Color.White,
-    background = Color.White,
-    onBackground = Color.Black,
-    surface = Color(0xFFF7F7F9),
-    onSurface = Color.Black,
-    surfaceVariant = Color(0xFFF2F2F7),
-    onSurfaceVariant = Color(0xFF6E6E73),
-    outline = Color(0xFFE5E5EA),
+    primaryContainer = Color(0xFFE9DDFF),
+    onPrimaryContainer = Color(0xFF22005D),
+    secondary = Color(0xFF4C6700),
+    onSecondary = Color.White,
+    secondaryContainer = Color(0xFFC6F26B),
+    onSecondaryContainer = Color(0xFF141F00),
+    tertiary = Color(0xFFB0366B),
+    onTertiary = Color.White,
+    tertiaryContainer = Color(0xFFFFD9E6),
+    onTertiaryContainer = Color(0xFF3E0022),
+    background = Color(0xFFFBF8FF),
+    onBackground = Color(0xFF1C1B20),
+    surface = Color(0xFFFBF8FF),
+    onSurface = Color(0xFF1C1B20),
+    surfaceVariant = Color(0xFFE8E0EC),
+    onSurfaceVariant = Color(0xFF4A454E),
+    outline = Color(0xFF7B757F),
+    outlineVariant = Color(0xFFCCC4CF),
+    surfaceContainerLowest = Color.White,
+    surfaceContainerLow = Color(0xFFF5F2FA),
+    surfaceContainer = Color(0xFFEFECF4),
+    surfaceContainerHigh = Color(0xFFE9E6EE),
+    surfaceContainerHighest = Color(0xFFE3E0E8),
+)
+
+/* ------------------------------------------------------------------
+ * SHAPES — large, varied corner radii
+ * ------------------------------------------------------------------ */
+private val ExpressiveShapes = Shapes(
+    extraSmall = RoundedCornerShape(8.dp),
+    small = RoundedCornerShape(14.dp),
+    medium = RoundedCornerShape(22.dp),
+    large = RoundedCornerShape(32.dp),
+    extraLarge = RoundedCornerShape(44.dp),
 )
 
 /**
@@ -59,10 +112,10 @@ val SFProDisplay = FontFamily(
     Font(R.font.sf_pro_display_heavy, FontWeight.W800),
 )
 
-// Heavy, tight typography — the backbone of the Apple Music look.
+// Heavy, tight typography. Bigger display/headline sizes for a bolder hierarchy.
 private val BitChordTypography = Typography(
-    displayLarge = TextStyle(fontWeight = FontWeight.W800, fontSize = 34.sp, letterSpacing = (-0.8).sp),
-    headlineLarge = TextStyle(fontWeight = FontWeight.W800, fontSize = 30.sp, letterSpacing = (-0.7).sp),
+    displayLarge = TextStyle(fontWeight = FontWeight.W800, fontSize = 40.sp, letterSpacing = (-1.2).sp),
+    headlineLarge = TextStyle(fontWeight = FontWeight.W800, fontSize = 32.sp, letterSpacing = (-0.9).sp),
     headlineMedium = TextStyle(fontWeight = FontWeight.W700, fontSize = 22.sp, letterSpacing = (-0.4).sp),
     titleLarge = TextStyle(fontWeight = FontWeight.W700, fontSize = 20.sp, letterSpacing = (-0.3).sp),
     titleMedium = TextStyle(fontWeight = FontWeight.W600, fontSize = 16.sp, letterSpacing = (-0.2).sp),
@@ -94,11 +147,21 @@ private fun Typography.withFamily(family: FontFamily) = Typography(
 @Composable
 fun BitChordTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    // Set to true to follow the wallpaper (Android 12+) instead of the fixed palette.
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
+    val context = LocalContext.current
+    val colors = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        darkTheme -> DarkColors
+        else -> LightColors
+    }
     MaterialTheme(
-        colorScheme = if (darkTheme) DarkColors else LightColors,
+        colorScheme = colors,
         typography = BitChordTypography,
+        shapes = ExpressiveShapes,
         content = content,
     )
 }
